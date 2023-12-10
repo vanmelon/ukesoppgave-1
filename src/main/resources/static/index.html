@@ -5,6 +5,15 @@
     <title>Title</title>
 </head>
 <body>
+<h2>Legg til produkt</h2>
+<form id="produktSkjema">
+    <label for="navn">Navn:</label>
+    <input type="text" id="navn" name="navn" required>
 
+    <label for="pris">Pris:</label>
+    <input type="number" id="pris" name="pris" step="0.01" required>
+
+    <button type="button" onclick="leggTilProdukt()">Legg til produkt</button>
+</form>
 </body>
 </html>

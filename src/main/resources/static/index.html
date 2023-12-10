@@ -5,8 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produktadministrasjon</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
+
 <h2>Legg til produkt</h2>
 <form id="produktSkjema">
     <label for="navn">Navn:</label>
@@ -18,6 +36,18 @@
     <button type="button" onclick="leggTilProdukt()">Legg til produkt</button>
 </form>
 
+<h2>Produkter</h2>
+<table id="produktTabell">
+    <thead>
+    <tr>
+        <th>Navn</th>
+        <th>Pris</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Produktene blir lagt til her dynamisk med jQuery -->
+    </tbody>
+</table>
 
 <script>
     function leggTilProdukt() {

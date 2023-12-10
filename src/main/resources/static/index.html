@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produktadministrasjon</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
 <h2>Legg til produkt</h2>
@@ -15,5 +17,43 @@
 
     <button type="button" onclick="leggTilProdukt()">Legg til produkt</button>
 </form>
+
+
+<script>
+    function leggTilProdukt() {
+        var navn = $("#navn").val();
+        var pris = $("#pris").val();
+
+        // Legg til produkt i tabellen
+        $("#produktTabell tbody").append("<tr><td>" + navn + "</td><td>" + pris + "</td></tr>");
+
+        // Legg også til produktet i backend (Java)
+        $.ajax({
+            type: "POST",
+            url: "/legg-til-produkt",  // Endre dette til din backend-endepunkt
+            data: { navn: navn, pris: pris },
+            success: function(response) {
+                console.log(response);
+            }
+        });
+
+        // Tøm skjemaet
+        $("#navn").val("");
+        $("#pris").val("");
+    }
+
+    // Hent produkter fra backend og vis dem i tabellen ved lasting av siden
+    $(document).ready(function() {
+        $.ajax({
+            type: "GET",
+            url: "/hent-alle-produkter",  // Endre dette til din backend-endepunkt
+            success: function(produkter) {
+                for (var i = 0; i < produkter.length; i++) {
+                    $("#produktTabell tbody").append("<tr><td>" + produkter[i].navn + "</td><td>" + produkter[i].pris + "</td></tr>");
+                }
+            }
+        });
+    });
+</script>
 </body>
 </html>
